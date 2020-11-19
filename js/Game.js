@@ -29,12 +29,12 @@ class Game {
         return this.players.find(player => player.active);
     }
     
-    handleKeydown(e) {
+    handleKeyDown(e) {
         if (this.ready) {
             if (e === 'ArrowLeft') {
-                //move left
+                this.activePlayer.activeTokens.moveLeft();
             } else if (e === 'ArrowRight') {
-                //move right
+                this.activePlayer.activeTokens.moveRight(this.board.cols);
             } else if (e === 'ArrowDown') {
                 //move down
             }
