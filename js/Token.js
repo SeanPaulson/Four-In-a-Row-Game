@@ -1,12 +1,15 @@
 class Token {
-    constructor(owner, id) {
+    constructor(index, owner) {
         this.owner = owner;
         this.id = `token-${index}-${owner.id}`;
         this.used = false;
     }
-    
+    /**
+    * Gets associated htmlToken.
+    * @return {element} Html element associated with token object.
+    */
     get htmlToken() {
-        return;
+        return document.getElementById(this.id);
     }
     
     drawHTMLToken() {

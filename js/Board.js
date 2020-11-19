@@ -1,18 +1,19 @@
 class Board {
     constructor() {
-        this.spaces = createSpaces();
         this.rows = 6;
         this.cols =7; 
+        this.spaces = this.createSpaces();
+        
     }
     
     createSpaces() {
         const spaces = [];
         
-        for(let r = 0; r < rows; r++){
+        for(let x = 0; x < this.cols; x++){
             const column = [];
             
-            for(let c = 0; c < cols; c++) {
-                const space = new Space(r, c);
+            for(let y = 0; y < this.rows; y++) {
+                const space = new Space(x, y);
                 column.push(space);
             }
             
@@ -24,7 +25,7 @@ class Board {
     
     drawHTMLBoard() {
         for(const column of this.spaces) {
-            for(const space of this.cols) {
+            for(const space of column) {
                 space.drawSVGSpace();
             }
         }
