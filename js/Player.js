@@ -50,7 +50,7 @@ class Player {
     * Gets the active token by returning the first token in the array of unused tokens.
     *@return {Object} First token object in the array of unused tokens.
     */
-    get activeTokens() {
+    get activeToken() {
         const currentToken = this.unusedTokens;
         return currentToken[0];
     }

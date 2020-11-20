@@ -3,7 +3,7 @@ class Board {
         this.rows = 6;
         this.cols =7; 
         this.spaces = this.createSpaces();
-        
+
     }
     
     createSpaces() {
@@ -16,13 +16,12 @@ class Board {
                 const space = new Space(x, y);
                 column.push(space);
             }
-            
+
             spaces.push(column);
         }
-        
         return spaces;
     }
-    
+
     drawHTMLBoard() {
         for(const column of this.spaces) {
             for(const space of column) {
@@ -30,6 +29,7 @@ class Board {
             }
         }
     }
+    
 }
 
 //let index = (row * game.colCount + col)

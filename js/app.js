@@ -1,4 +1,4 @@
-let game = new Game();
+const game = new Game();
 
 /** 
  * Listens for click on `#begin-game` and calls startGame() on game object
@@ -10,6 +10,6 @@ function(){
     document.getElementById('play-area').style.opacity = '1';
 });
 
-document.addEventListener('keydown', event => {
-    game.handleKeyDown(event)
+document.addEventListener('keydown', function(e) {
+    game.handleKeyDown(e.key);
 });
