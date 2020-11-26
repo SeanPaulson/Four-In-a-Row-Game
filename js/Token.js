@@ -51,7 +51,7 @@ class Token {
             this.columnLocation++;
         }
     }
-    
+
     /**
     * Drops html token into targeted board space.
     * @param {Object} target - Targeted space for dropped tokens
@@ -60,7 +60,6 @@ class Token {
     */
     drop(target, reset) {
         this.dropped = true;
-        
         $(this.htmlToken).animate({
             top: (target.y * target.diameter)
         }, 750, 'easeOutBounce', reset);

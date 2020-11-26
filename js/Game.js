@@ -12,6 +12,16 @@ class Game {
         return players;
     }
     
+    switchPlayer() {
+        let activePlayerId = this.activePlayer.id;
+        for (let player of this.players) {
+            if (player.id === activePlayerId) {
+                player.active = false;
+            } else {player.active = true}
+        }
+        
+    }
+    
     /**
     * Initializes game.
     */
@@ -23,7 +33,7 @@ class Game {
     
     /**
     * Returns active player
-    * @Returns {Object} First token object in the array of unused tokens.
+    * @Returns {Object} player with active === true.
     */
     get activePlayer() {
         return this.players.find(player => player.active);
@@ -40,8 +50,7 @@ class Game {
             }
         }
     }
-    
-    
+
     playToken() {
        let targetColumn = this.activePlayer.activeToken.columnLocation;
        let targetSpace = null;
@@ -52,11 +61,56 @@ class Game {
                targetSpace = space;
            }
        }
-       
+
+console.log("targetSpace" + targetSpace);
        if (targetSpace !== null) {
            this.ready = false;
-           this.activePlayer.activeToken.drop(targetSpace)
+           this.activePlayer.activeToken.drop(targetSpace,game.updateGameStatus(targetColumn, targetSpace))
+           this.activePlayer.activeToken.used = true;
        }
+    }
+
+    updateGameStatus(targetColumn, targetSpace) {
+        let counter = 0;
+        let targetRow = targetSpace.y;
+        //checkForWinningMove 
+           //check column
+           for (let space of this.board.spaces[targetColumn]) {
+               if (space.token === null) {
+                   counter = 0;
+                   
+               } else if (space.owner.id === this.activePlayer.id) {
+                   counter++;
+                   //(counter === 4) ? gameOver(this.activePlayer)
+               }
+           }
+           //check row
+                counter = 0;
+                console.log(targetRow);
+               for (let space of this.board.spaces) {
+                  if (space[targetRow].token === null) {
+                      counter = 0;
+                      
+                  } else if (space[targetRow].owner.id === this.activePlayer.id) {
+                      counter++;
+                      //(counter === 4) ? gameOver(this.activePlayer);
+                  }
+               }
+               console.log("counter****" + counter);
+           //check upDiag
+           //check downDiag
+        
+        
+        //if win return GameOver
+        //else switch active player
+        this.switchPlayer();
+        console.log(this.activePlayer);
+        console.log('active player' + this.activePlayer.id);
+        console.log('token test '+ this.activePlayer.activeToken.id);
+        //reset token
+        this.activePlayer.activeToken.drawHTMLToken();
+        
+        this.ready = true;
     }
     
 }
